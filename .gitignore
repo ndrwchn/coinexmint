@@ -105,3 +105,5 @@ venv.bak/
 log.txt
 cache.data
 config.json
+records.txt
+.DS_Store

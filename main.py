@@ -252,8 +252,16 @@ def balance_cost():
 	_private_api.sell(amount,price,money_markets)
 	records['money_fees'] = 0
 	
-	logging.info('clear predict_cet %0.2f to 0' % tmp_data['predict_cet'])
+	cur_hour = time.strftime("%Y-%m-%d %H", time.localtime())
+
+	item = '%s mined %0.3f CET\r\n' % (cur_hour,tmp_data['predict_cet'])
+	logging.info(item)
+
+	with open('records.txt', 'a+') as f:
+	    f.write(item)
+
 	tmp_data['predict_cet'] = 0
+
 
 init_logger()
 
