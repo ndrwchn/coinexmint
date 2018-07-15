@@ -135,10 +135,12 @@ money = "BCH"
 
 # 打赏
 
-如果你觉得本项目对你有用
-请打赏bch
-1QCBhad9pegNenYGbtYYC9mkwZpEUMB3tP
-我会继续完善下去
+
+如果你觉得我写的程序对你有用或是有一定帮助，请我喝杯咖啡吧！ 
+
+* bch: 1QCBhad9pegNenYGbtYYC9mkwZpEUMB3tP
+
+* cet: 0x8d740c9779674b13a7038a5d56b04470b7a1b096
 
 
 
