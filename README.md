@@ -33,40 +33,64 @@
 # 参数说明
 
 coinex_api_id="xxxx"
+
 机器人密钥id(不要泄漏给他其他人)
 
+
 coinex_api_key="xxx"
+
 机器人密钥key(不要泄漏给他其他人)
 
+
 partial_ratio = 0.1
+
 每单的仓位比例 0.1 就是 10%的仓位比例 减少该值 可以减少被套的资金量 但是挖矿速度也会下降
 
+
 bid_ask_spread = 0 
+
 买单卖单差价 百分比 0就是 原价 自己买自己卖 0.1 就是相差千分之1
 
+
 wave_ratio = 1
+
 最近成交波动方差 1就是 最近成交价格浮动 小于1% 减小该值可以减少被套风险 但是挖矿速度会下降
 
+
 wait_order = 10
+
 未成交订单等待时间 单位分钟 默认等待10分钟
 
+
 stop_threshold = 0.9
+
 挖矿停止阈值 因为读取的coinex难度api 已挖cet有一定延迟 可以调小这个值来抵御 默认0.9 已挖cet达到难度的90%就停止
 
+
 first_submit =  "sell"
+
 优先提交卖单还是买单  sell就是 先提交卖 buy就是先提交买
 
+
 batch_size = 10
+
 一个批次内挖矿次数 默认是10次 如果你没单的金额特别大 可以减小该数值 最小值1
 
+
 market = "CDYBCH"
+
 挖矿交易对 全大写 也可以是 "BTCUSDT" 等等
 
+
 goods = "CDY"
+
 交易对商品 也可以是 "BTC" 等等 请注意和market对应
 
+
 money = "BCH"
+
 交易对计价币种 也可以是 "USDT" 等等 请注意和market对应
+
 
 
 # 快速开始
