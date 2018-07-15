@@ -3,8 +3,9 @@
 # 使用须知
 1. 本项目没有经过严格测试 仅测试过以下交易对
 	* 感谢flufy3d 测试CDYBCH交易对
-	* 感谢imcoddy 测试ETHBCH交易对
 	* 感谢shawncd 测试BTCUSDT交易对
+	* 感谢Max     测试ETHUSDT交易对
+	* 感谢imcoddy 测试ETHBCH交易对
 	* 感谢mmbbss888 测试BTMBCH交易对
 2. 交易挖矿有风险
 3. 请先小额测试
