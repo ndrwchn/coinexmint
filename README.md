@@ -170,7 +170,7 @@ money = "BCH"
 
 * bch: 1QCBhad9pegNenYGbtYYC9mkwZpEUMB3tP
 
-* cet: 0x8d740c9779674b13a7038a5d56b04470b7a1b096
+* cet: 0x8d740c9779674b13a7038a5d56b04470b7a1b096 (Coinex 站内转账 flufy3d@gmail.com)
 
 
 
