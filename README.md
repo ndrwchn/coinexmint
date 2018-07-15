@@ -108,9 +108,6 @@ money = "BCH"
 	b. 安装requests模块
 		pip install requests
 
-	c. 安装python有困难的同学可以直接用我打包的exe版本
-		[CoinexMiner](https://github.com/flufy3d/CoinexMiner/releases)
-
 3. 调整 config-example.json 里面的配置参数 (注意 输入的字符全是英文 不要有中文标点符号)
 
 4. 将 config-example.json 改名 config.json
@@ -155,6 +152,11 @@ money = "BCH"
 5. 安装python3.7 提示需要升级windows sp1补丁
 
 	请安装老版本的python3  [Python 3.4.3](https://www.python.org/downloads/release/python-343/)
+
+6. 实在不会装python怎么办
+
+	装python有困难的同学可以直接用我打包的exe版本[CoinexMiner](https://github.com/flufy3d/CoinexMiner/releases)
+		
 
 
 # 免责声明
