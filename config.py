@@ -27,4 +27,6 @@ wait_order = data['wait_order']
 
 stop_threshold = data['stop_threshold']
 
-first_submit = data["first_submit"]
+first_submit = data['first_submit']
+
+batch_size = data['batch_size']

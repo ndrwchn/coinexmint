@@ -165,7 +165,7 @@ def digging():
 				return 'timeout'
 
 		index = index+1
-		if index > 10:
+		if index > config.batch_size:
 			return 'maximum'
 		time.sleep(0.05)
 

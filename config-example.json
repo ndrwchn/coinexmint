@@ -16,6 +16,8 @@
 
 	"first_submit" : "sell",
 
+	"batch_size" : 10,
+
 	"market" : "CDYBCH",
 
 	"goods" : "CDY",

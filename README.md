@@ -56,6 +56,9 @@ stop_threshold = 0.9
 first_submit =  "sell"
 优先提交卖单还是买单  sell就是 先提交卖 buy就是先提交买
 
+batch_size = 10
+一个批次内挖矿次数 默认是10次 如果你没单的金额特别大 可以减小该数值 最小值1
+
 market = "CDYBCH"
 挖矿交易对 全大写 也可以是 "BTCUSDT" 等等
 
