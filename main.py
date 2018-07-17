@@ -140,17 +140,21 @@ def digging():
 		delta = sell_price - buy_price
 		if sell_price - buy_price >= 0.000000019:
 			logging.info('space is enough')
-			price = sell_price - 0.00000001
-			price_s = price
-			price_b = price * (1 - config.bid_ask_spread/100.0)
+
 			amount = records['goods_available'] * config.partial_ratio
 
 			if config.first_submit == 'sell':
+				price = buy_price + 0.00000001
+				price_s = price * (1 + config.bid_ask_spread/100.0)
+				price_b = price
 				logging.info('sell %0.3f at %0.8f %s' % (amount,price_s,config.market))
 				data_s = _private_api.sell(amount,price_s,config.market)
 				logging.info('buy %0.3f at %0.8f %s' % (amount,price_b,config.market))
 				data_b = _private_api.buy(amount,price_b,config.market)
 			else:
+				price = sell_price - 0.00000001
+				price_s = price
+				price_b = price * (1 - config.bid_ask_spread/100.0)
 				logging.info('buy %0.3f at %0.8f %s' % (amount,price_b,config.market))
 				data_b = _private_api.buy(amount,price_b,config.market)	
 				logging.info('sell %0.3f at %0.8f %s' % (amount,price_s,config.market))
