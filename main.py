@@ -361,6 +361,6 @@ if __name__ == "__main__":
 			logging.error(str(e))
 			if config.telegram_notify:
 				send_message('CoinexMiner: ' + str(e) + ', restarting in 1 min')
-			sleep(60)
+			time.sleep(60)
 
 	
