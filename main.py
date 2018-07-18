@@ -354,10 +354,12 @@ def main():
 		
 
 if __name__ == "__main__":
-	try:
-		main()
-	except Exception as e:
-		logging.error(str(e))
-		if config.telegram_notify:
-			send_message('CoinexMiner: ' + str(e))
+	while True:
+		try:
+			main()
+		except Exception as e:
+			logging.error(str(e))
+			if config.telegram_notify:
+				send_message('CoinexMiner: ' + str(e) + ', restarting in 1 min')
+			sleep(60)
 	
