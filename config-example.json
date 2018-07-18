@@ -18,6 +18,14 @@
 
 	"batch_size" : 10,
 
+	"telegram_notify" : false,
+
+	"telegram_chatid" : "12345",
+
+	"telegram_token" : "12345:AAFu7Pyx6WGBrfbypr9idvnjdxxxxxxxxxx",
+
+	"telegram_rmsc" : 3 ,
+
 	"market" : "CDYBCH",
 
 	"goods" : "CDY",
