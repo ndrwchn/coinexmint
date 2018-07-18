@@ -355,5 +355,5 @@ if __name__ == "__main__":
 	except Exception as e:
 		logging.error(str(e))
 		if config.telegram_notify:
-			send_message(str(e))
+			send_message('CoinexMiner: ' + str(e))
 	
