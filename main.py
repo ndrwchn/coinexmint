@@ -220,7 +220,7 @@ def need_pause():
 	return False
 
 def update_balance():
-	data = _private_api.get_balances();
+	data = _private_api.get_balances()
 	data = data['data']
 
 	records['goods_available'] = float(data[config.goods]['available'])
