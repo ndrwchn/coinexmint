@@ -164,7 +164,22 @@ class PrivateAPI(object):
         else:
             raise Exception("Critical error no get_latest_transaction")
 
+
     def get_ticker(self,market):
+        try:
+            return self._get_ticker(market)
+        except Exception as e:
+            logging.error('get_ticker'+str(e))
+            time.sleep(0.5)
+            try:
+                return self._get_ticker(market)
+            except Exception as e:
+                logging.error('get_ticker'+str(e))
+                time.sleep(2.5)
+                return self._get_ticker(market)
+  
+
+    def _get_ticker(self,market):
         request_client = RequestClient()
         response = request_client.request('GET', 'https://api.coinex.com/v1/market/ticker?market='+market)
 
