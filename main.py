@@ -20,11 +20,11 @@ records['money_fees'] = 0
 records['goods_fees'] = 0
 records['balance_cost_time'] = time.time()
 records['variance'] = 1
+records['predict_cet'] = 0
 
 tmp_data = {}
 tmp_data['tprice_cet_money'] = 0
 tmp_data['tprice_goods_money'] = 0
-tmp_data['predict_cet'] = 0
 tmp_data['prev_api_predict_cet'] = 0.1
 
 def get_self_cet_prediction():
@@ -96,9 +96,9 @@ def check_order_state(_type,data):
 			total_money = tmp_data['tprice_goods_money'] * records['goods_fees']
 			total_money = total_money + records['money_fees']
 
-			tmp_data['predict_cet'] = total_money / tmp_data['tprice_cet_money']
+			records['predict_cet'] = total_money / tmp_data['tprice_cet_money']
 
-			logging.info('mined %0.2f cet; %0.4f m costed; %0.4f g costed' % (tmp_data['predict_cet'],records['money_fees'],records['goods_fees']))
+			logging.info('mined %0.2f cet; %0.4f m costed; %0.4f g costed' % (records['predict_cet'],records['money_fees'],records['goods_fees']))
 			
 
 			pickle.dump(records,open('cache.data','wb'))
@@ -213,8 +213,8 @@ def need_pause():
 		logging.info('from api. difficulty %f prediction %0.3f' % (difficulty,prediction))
 		return True
 
-	if tmp_data['predict_cet'] > difficulty * config.stop_threshold:
-		logging.info('from self. difficulty %f prediction %0.3f' % (difficulty,tmp_data['predict_cet']))
+	if records['predict_cet'] > difficulty * config.stop_threshold:
+		logging.info('from self. difficulty %f prediction %0.3f' % (difficulty,records['predict_cet']))
 		return True
 
 	return False
@@ -260,7 +260,7 @@ def balance_cost():
 	
 	cur_hour = time.strftime("%Y-%m-%d %H", time.localtime())
 
-	item = '%s mined %0.3f CET\r\n' % (cur_hour,tmp_data['predict_cet'])
+	item = '%s mined %0.3f CET\r\n' % (cur_hour,records['predict_cet'])
 	logging.info(item)
 
 	if config.telegram_notify:
@@ -269,7 +269,7 @@ def balance_cost():
 	with open('records.txt', 'a+') as f:
 	    f.write(item)
 
-	tmp_data['predict_cet'] = 0
+	records['predict_cet'] = 0
 
 
 init_logger()
@@ -309,7 +309,11 @@ def main():
 				update_balance()
 		
 		if random.random() < 0.2:
-			get_self_cet_prediction()
+			try:
+				get_self_cet_prediction()
+			except Exception as e:
+				logging.info('get_self_cet_prediction: ' + str(e))
+			
 
 		cur_time = time.time()
 
@@ -324,8 +328,8 @@ def main():
 
 		if need_pause():
 			logging.info('need_pause mine too much')
-			time.sleep(5)
 			pickle.dump(records,open('cache.data','wb'))
+			time.sleep(float(60-time.gmtime().tm_min)*60)
 			continue
 
 		try:
@@ -350,10 +354,13 @@ def main():
 		
 
 if __name__ == "__main__":
-	try:
-		main()
-	except Exception as e:
-		logging.error(str(e))
-		if config.telegram_notify:
-			send_message(str(e))
+	while True:
+		try:
+			main()
+		except Exception as e:
+			logging.error(str(e))
+			if config.telegram_notify:
+				send_message('CoinexMiner: ' + str(e) + ', restarting in 1 min')
+			sleep(60)
+
 	
