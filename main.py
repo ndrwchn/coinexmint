@@ -328,8 +328,8 @@ def main():
 
 		if need_pause():
 			logging.info('need_pause mine too much')
-			time.sleep(5)
-			pickle.dump(records,open('cache.data','wb'))
+      pickle.dump(records,open('cache.data','wb'))
+			time.sleep(float(60-time.gmtime().tm_min)*60)
 			continue
 
 		try:
@@ -362,4 +362,5 @@ if __name__ == "__main__":
 			if config.telegram_notify:
 				send_message('CoinexMiner: ' + str(e) + ', restarting in 1 min')
 			sleep(60)
+
 	
