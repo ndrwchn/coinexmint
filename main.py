@@ -328,7 +328,7 @@ def main():
 
 		if need_pause():
 			logging.info('need_pause mine too much')
-      pickle.dump(records,open('cache.data','wb'))
+			pickle.dump(records,open('cache.data','wb'))
 			time.sleep(float(60-time.gmtime().tm_min)*60)
 			continue
 
