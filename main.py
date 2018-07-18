@@ -9,6 +9,8 @@ import random
 
 import importlib
 
+from telegram import send_message
+
 
 _private_api = CoinexAPI.PrivateAPI()
 
@@ -261,6 +263,9 @@ def balance_cost():
 	item = '%s mined %0.3f CET\r\n' % (cur_hour,tmp_data['predict_cet'])
 	logging.info(item)
 
+	if config.telegram_notify:
+		send_message(item)
+		
 	with open('records.txt', 'a+') as f:
 	    f.write(item)
 
@@ -272,7 +277,10 @@ init_logger()
 def main():
 	global records
 	
-	logging.info('Start Mining!')
+	welcome = 'CoinexMiner Started!'
+	logging.info(welcome)
+	if config.telegram_notify:
+		send_message(welcome)
 
 	try:
 		records = pickle.load(open('cache.data','rb'))
@@ -346,4 +354,6 @@ if __name__ == "__main__":
 		main()
 	except Exception as e:
 		logging.error(str(e))
+		if config.telegram_notify:
+			send_message(str(e))
 	

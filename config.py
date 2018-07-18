@@ -30,3 +30,11 @@ stop_threshold = data['stop_threshold']
 first_submit = data['first_submit']
 
 batch_size = data['batch_size']
+
+telegram_notify = data['telegram_notify']
+
+telegram_chatid = data['telegram_chatid']
+
+telegram_token = data['telegram_token']
+
+telegram_rmsc = data['telegram_rmsc']

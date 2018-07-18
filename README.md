@@ -83,6 +83,19 @@ batch_size = 10
 一个批次内挖矿次数 默认是10次 如果你没单的金额特别大 可以减小该数值 最小值1
 
 
+telegram_notify : false
+
+telegram通知 默认不启用 不用的话 telegram开头的参数都可以不用管
+
+如果想使用 请参考[教程](https://www.forsomedefinition.com/automation/creating-telegram-bot-notifications/)
+
+telegram_chatid : "12345"
+
+telegram_token : "12345:AAFu7Pyx6WGBrfbypr9idvnjdKfAXu9xxxx"
+
+telegram_rmsc : 3
+
+
 market = "CDYBCH"
 
 挖矿交易对 全大写 也可以是 "BTCUSDT" 等等
