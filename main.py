@@ -309,7 +309,11 @@ def main():
 				update_balance()
 		
 		if random.random() < 0.2:
-			get_self_cet_prediction()
+			try:
+				get_self_cet_prediction()
+			except Exception as e:
+				logging.info('get_self_cet_prediction: ' + str(e))
+			
 
 		cur_time = time.time()
 
