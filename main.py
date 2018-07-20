@@ -143,20 +143,27 @@ def digging():
 		#todo for every trading pair it should be have different value
 		minimal_price_pulse = 0.00000001
 
-		#fixd by ignore_amount
-		sell_amount = float(data['ticker']['sell_amount'])
-		buy_amount = float(data['ticker']['buy_amount'])
-		if sell_amount <= config.ignore_amount:
-			sell_price = sell_price + minimal_price_pulse
-		if buy_amount <= config.ignore_amount:
-			buy_price = buy_price - minimal_price_pulse
-
-
-
-		delta = sell_price - buy_price
+		space_is_enough = False
+		
 		if sell_price - buy_price >= 0.000000019:
-			logging.info('space is enough')
+			space_is_enough = True
+		else:
+			space_is_enough = False
 
+		if space_is_enough == False:
+			#fixd by ignore_amount
+			sell_amount = float(data['ticker']['sell_amount'])
+			buy_amount = float(data['ticker']['buy_amount'])
+			if sell_amount <= config.ignore_amount:
+				sell_price = sell_price + minimal_price_pulse
+				space_is_enough = True
+			if buy_amount <= config.ignore_amount:
+				buy_price = buy_price - minimal_price_pulse
+				space_is_enough = True
+
+
+		if space_is_enough:
+			
 			amount = records['goods_available'] * config.partial_ratio
 
 			if config.first_submit == 'sell':
@@ -183,6 +190,9 @@ def digging():
 			if stats_b == 'timeout' or stats_s == 'timeout':
 				logging.info('wait order too much time')
 				return 'timeout'
+		else:
+			logging.info('no space between sell1 and buy1')
+
 
 		index = index+1
 		if index > config.batch_size:
