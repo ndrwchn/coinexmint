@@ -18,6 +18,8 @@
 
 	"batch_size" : 10,
 
+	"ignore_amount" : 0,
+
 	"telegram_notify" : false,
 
 	"telegram_chatid" : "12345",

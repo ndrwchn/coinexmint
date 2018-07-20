@@ -87,7 +87,7 @@ def check_order_state(_type,data):
 	index = 0
 
 	while True:
-		if left_amout == 0:
+		if left_amout == 0 or left_amout <= config.ignore_amount:
 			if _type == 'sell':
 				records['money_fees'] = records['money_fees'] + float(data['deal_fee'])
 			else:
@@ -139,6 +139,20 @@ def digging():
 		data = data['data']
 		sell_price = float(data['ticker']['sell'])
 		buy_price = float(data['ticker']['buy'])
+
+		#todo for every trading pair it should be have different value
+		minimal_price_pulse = 0.00000001
+
+		#fixd by ignore_amount
+		sell_amount = float(data['ticker']['sell_amount'])
+		buy_amount = float(data['ticker']['buy_amount'])
+		if sell_amount <= config.ignore_amount:
+			sell_price = sell_price + minimal_price_pulse
+		if buy_amount <= config.ignore_amount:
+			buy_price = buy_price - minimal_price_pulse
+
+
+
 		delta = sell_price - buy_price
 		if sell_price - buy_price >= 0.000000019:
 			logging.info('space is enough')
@@ -146,7 +160,7 @@ def digging():
 			amount = records['goods_available'] * config.partial_ratio
 
 			if config.first_submit == 'sell':
-				price = buy_price + 0.00000001
+				price = buy_price + minimal_price_pulse
 				price_s = price * (1 + config.bid_ask_spread/100.0)
 				price_b = price
 				logging.info('sell %0.3f at %0.8f %s' % (amount,price_s,config.market))
@@ -154,7 +168,7 @@ def digging():
 				logging.info('buy %0.3f at %0.8f %s' % (amount,price_b,config.market))
 				data_b = _private_api.buy(amount,price_b,config.market)
 			else:
-				price = sell_price - 0.00000001
+				price = sell_price - minimal_price_pulse
 				price_s = price
 				price_b = price * (1 - config.bid_ask_spread/100.0)
 				logging.info('buy %0.3f at %0.8f %s' % (amount,price_b,config.market))
