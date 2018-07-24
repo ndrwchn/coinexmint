@@ -165,9 +165,15 @@ def digging():
 		if space_is_enough:
 			
 			amount = records['goods_available'] * config.partial_ratio
+			price = 0
+
+			if config.target_price == 'b1':
+				price = buy_price + minimal_price_pulse
+			else:
+				price = sell_price - minimal_price_pulse
 
 			if config.first_submit == 'sell':
-				price = buy_price + minimal_price_pulse
+				
 				price_s = price * (1 + config.bid_ask_spread/100.0)
 				price_b = price
 				logging.info('sell %0.3f at %0.8f %s' % (amount,price_s,config.market))
@@ -175,7 +181,7 @@ def digging():
 				logging.info('buy %0.3f at %0.8f %s' % (amount,price_b,config.market))
 				data_b = _private_api.buy(amount,price_b,config.market)
 			else:
-				price = sell_price - minimal_price_pulse
+				
 				price_s = price
 				price_b = price * (1 - config.bid_ask_spread/100.0)
 				logging.info('buy %0.3f at %0.8f %s' % (amount,price_b,config.market))

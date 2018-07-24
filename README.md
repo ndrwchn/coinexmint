@@ -68,7 +68,7 @@ stop_threshold = 0.9
 挖矿停止阈值 因为读取的coinex难度api 已挖cet有一定延迟 可以调小这个值来抵御 默认0.9 已挖cet达到难度的90%就停止
 
 
-first_submit =  "sell"
+first_submit = "sell"
 
 优先提交卖单还是买单  sell就是 先提交卖 buy就是先提交买
 
@@ -77,6 +77,10 @@ first_submit =  "sell"
 卖先盯住买一价 下降区间适合执行卖先策略
 
 横盘的时候 随意选择一个
+
+target_price = "b1"
+
+目标价格 b1就是锚定买一价格 s1就是锚定卖一价格
 
 batch_size = 10
 
