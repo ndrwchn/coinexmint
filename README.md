@@ -80,7 +80,7 @@ first_submit = "sell"
 
 target_price = "b1"
 
-目标价格 b1就是锚定买一价格 s1就是锚定卖一价格
+目标价格 b1就是锚定买一价格 s1就是锚定卖一价格. if s1 most likely selling order left over both first_submit set to "sell" or "buy".
 
 batch_size = 10
 

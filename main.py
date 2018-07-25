@@ -84,7 +84,11 @@ def check_order_state(_type,data):
 
 	left_amout = float(data['left'])
 
+	left_ratio = 0
+
 	index = 0
+
+	index_e = 0
 
 	while True:
 		if left_amout == 0 or left_amout <= config.ignore_amount:
@@ -111,9 +115,17 @@ def check_order_state(_type,data):
 				data = _private_api.get_order(config.market,_id)
 				data = data['data']
 				left_amout = float(data['left'])
+
 				logging.info('check order state: id %d left %0.3f' % (_id,left_amout))
+
+				left_ratio = left_amout / float(records['goods_available'] * config.partial_ratio)
+				if left_ratio > 0.8 :
+					logging.info('====:: need change sell mode here. %s' % (left_ratio))
 			except Exception as e:
 				logging.info(str(e))
+				index_e = index + 1
+				if index_e > 3:
+					return 'done'
 
 
 		elapsed_time = time.time() - start_time
