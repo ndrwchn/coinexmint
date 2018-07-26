@@ -209,6 +209,11 @@ def digging():
 			stats_b = check_order_state('buy',data_b)
 			stats_s = check_order_state('sell',data_s)
 
+			# here can add action based on stats_b and stats_s. eg. if left amount of goods < even number (== money) 10%, then cancle sell order.
+			# logging for test data structure data_b
+			logging.info('data_buy: %s' %(data_b))
+			logging.info('data_sell: %s' %(data_s))
+
 			if stats_b == 'timeout' or stats_s == 'timeout':
 				logging.info('wait order too much time')
 				return 'timeout'
