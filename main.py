@@ -125,6 +125,7 @@ def check_order_state(_type,data):
 				logging.info(str(e))
 				index_e = index + 1
 				if index_e > 3:
+					index_e = 0
 					return 'done'
 
 
