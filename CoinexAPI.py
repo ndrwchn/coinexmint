@@ -121,6 +121,28 @@ class PrivateAPI(object):
             elif "data" in data:         
                 return data
 
+    def cancel_order(self, id, market):
+        request_client = RequestClient()
+        data = {
+                "id": id,
+                "market": market
+            }
+        # print market
+        response = request_client.request(
+                'DELETE',
+                'https://api.coinex.com/v1/order/pending',
+                json=data,
+        )
+        if response != None:
+            data = complex_json.loads(response.text)
+            if data["code"] != 0:
+                raise Exception(data["message"])
+            elif "data" in data:         
+                return data
+        else:
+            raise Exception("Critical error no cancel_order_transaction")
+
+
     def get_balances(self):
         """Get balance"""
         request_client = RequestClient()
