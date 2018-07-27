@@ -122,12 +122,11 @@ def check_order_state(_type,data):
 				if left_ratio > 0.8:
 					logging.info('====:: need change sell mode here. %s' % (left_ratio))
 
-				elapsed_time = time.tim() - start_time
+				elapsed_time = time.time() - start_time
 
 				if  elapsed_time > 60*2:
 					logging.info('====:: choose to Continue order or skip: press C continue S skip, F flip sell to buy or vise.' )
-					s_choice = ''
-					input('Please choose your option' % s_choice)
+					s_choice = input('Please choose your option' % s_choice)
 					if s_choice == 'S':
 						return 'timeout'
 					elif s_choice == 'C':
