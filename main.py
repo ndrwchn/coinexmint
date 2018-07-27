@@ -122,7 +122,9 @@ def check_order_state(_type,data):
 				if left_ratio > 0.8:
 					logging.info('====:: need change sell mode here. %s' % (left_ratio))
 
-				if  elapsed_time > 60*3:
+				elapsed_time = time.tim() - start_time
+
+				if  elapsed_time > 60*2:
 					logging.info('====:: choose to Continue order or skip: press C continue S skip, F flip sell to buy or vise.' )
 					s_choice = ''
 					input('Please choose your option' % s_choice)
@@ -224,10 +226,15 @@ def digging():
 
 			# here can add action based on stats_b and stats_s. eg. if left amount of goods < even number (== money) 10%, then cancle sell order.
 			# logging for test data structure data_b
-			logging.info('data_buy: %s' %(data_b))
-			logging.info('data_sell: %s' %(data_s))
+			# logging.info('data_buy: %s' %(data_b))
+			# logging.info('data_sell: %s' %(data_s))
 
 			# add some code to flipping here 
+			if stats_b == 'flipping buy':
+				logging.info('flipping to buy?')
+			
+			if stats_s == 'flipping sell':
+				logging.info('fipping to sell now?')
 
 
 			if stats_b == 'timeout' or stats_s == 'timeout':
