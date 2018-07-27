@@ -10,6 +10,7 @@ import random
 import importlib
 
 from telegram import send_message
+from threading import Timer
 
 
 _private_api = CoinexAPI.PrivateAPI()
@@ -126,7 +127,16 @@ def check_order_state(_type,data):
 
 				if  elapsed_time > 60*2:
 					logging.info('====:: choose to Continue order or skip: press C continue S skip, F flip sell to buy or vise.' )
-					s_choice = input('Please choose your option' % s_choice)
+
+
+					timeout0 = 5 # seconds to wait input
+					t = Timer(timeout0, print, ['sorry, times up, continue.'])
+					t.start()
+					s_choice = ''
+					prompt = "You have %d seconds to choose the correct answer...\n" % timeout0
+					s_choice = input(prompt)
+					t.cancel()
+
 					if s_choice == 'S':
 						return 'timeout'
 					elif s_choice == 'C':
@@ -194,7 +204,7 @@ def digging():
 			if records['goods_available'] < 280000 or records['goods_available'] > 480000:
     				time.sleep(5*60)
 			
-			amount = records['goods_available'] * config.partial_ratio
+			amount = records['goods_available'] * config.partial_ratio + random.random()*200
 			price = 0
 
 			if config.target_price == 'b1':
