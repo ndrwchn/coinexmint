@@ -6,6 +6,7 @@ import json
 import pickle
 import config
 import random
+import keyboard
 
 import importlib
 
