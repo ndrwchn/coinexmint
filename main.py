@@ -116,11 +116,24 @@ def check_order_state(_type,data):
 				data = data['data']
 				left_amout = float(data['left'])
 
-				logging.info('check order state: id %d left %0.3f' % (_id,left_amout))
+				logging.info('check order state: id %d %s left %0.3f' % (_id, _type, left_amout))
 
 				left_ratio = left_amout / float(records['goods_available'] * config.partial_ratio)
-				if left_ratio > 0.8 :
+				if left_ratio > 0.8:
 					logging.info('====:: need change sell mode here. %s' % (left_ratio))
+
+				if  elapsed_time > 60*3:
+					logging.info('====:: choose to Continue order or skip: press C continue S skip, F flip sell to buy or vise.' )
+					s_choice = ''
+					input('Please choose your option' % s_choice)
+					if s_choice == 'S':
+						return 'timeout'
+					elif s_choice == 'C':
+						return 'done'
+					elif s_choice == 'F':
+						logging.info('return value: %s' % 'flipping ' + _type)
+						return 'flipping ' + _type
+
 			except Exception as e:
 				logging.info(str(e))
 				index_e = index + 1
@@ -205,7 +218,7 @@ def digging():
 				logging.info('sell %0.3f at %0.8f %s' % (amount,price_s,config.market))
 				data_s = _private_api.sell(amount,price_s,config.market)
 
-
+			# TOD: add option to choose give up or cancel order if over 3 minutes
 			stats_b = check_order_state('buy',data_b)
 			stats_s = check_order_state('sell',data_s)
 
@@ -213,6 +226,9 @@ def digging():
 			# logging for test data structure data_b
 			logging.info('data_buy: %s' %(data_b))
 			logging.info('data_sell: %s' %(data_s))
+
+			# add some code to flipping here 
+
 
 			if stats_b == 'timeout' or stats_s == 'timeout':
 				logging.info('wait order too much time')
