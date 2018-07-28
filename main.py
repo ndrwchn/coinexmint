@@ -129,7 +129,7 @@ def check_order_state(_type,data):
 				if  elapsed_time > 60*2:
 					logging.info('====:: choose to Continue order or skip: press C continue S skip, F flip sell to buy or vise.' )
 
-
+                    # TOD: refer test2.py method instead of the following:
 					# timeout0 = 5 # seconds to wait input
 					# t = Timer(timeout0, print, ['sorry, times up, continue.'])
 					# t.start()
