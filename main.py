@@ -6,12 +6,12 @@ import json
 import pickle
 import config
 import random
-import keyboard
+
+import sys, select
 
 import importlib
 
 from telegram import send_message
-from threading import Timer
 
 
 _private_api = CoinexAPI.PrivateAPI()
@@ -127,7 +127,7 @@ def check_order_state(_type,data):
 				elapsed_time = time.time() - start_time
 
 				if  elapsed_time > 60*2:
-					logging.info('====:: choose to Continue order or skip: press C continue S skip, F flip sell to buy or vise.' )
+					logging.info('====:: choose to Continue order or skip: press C continue [s] skip, [f] flip sell to buy or vise.' )
 
                     # TOD: refer test2.py method instead of the following:
 					# timeout0 = 5 # seconds to wait input
@@ -138,13 +138,27 @@ def check_order_state(_type,data):
 					# s_choice = input(prompt)
 					# t.cancel()
 
-					# if s_choice == 'S':
-					# 	return 'timeout'
-					# elif s_choice == 'C':
-					# 	return 'done'
-					# elif s_choice == 'F':
-					# 	logging.info('return value: %s' % 'flipping ' + _type)
-					# 	return 'flipping ' + _type
+					i, o, e = select.select( [sys.stdin], [], [], 5 )
+
+					if (i):
+						s_choice = sys.stdin.readline().strip()
+						logging.info ("You choosed: %s" s_choice)
+						if s_choice == 's':
+							return 'timeout'
+						# elif s_choice == 'c':
+						# 	return 'done'
+						elif s_choice == 'f':
+							logging.info('return value: %s' % 'flipping ' + _type)
+							return 'flipping ' + _type
+						logging.info ("You choosed nothing!")
+
+						# if s_choice == 'S':
+						# 	return 'timeout'
+						# elif s_choice == 'C':
+						# 	return 'done'
+						# elif s_choice == 'F':
+						# 	logging.info('return value: %s' % 'flipping ' + _type)
+						# 	return 'flipping ' + _type
 
 			except Exception as e:
 				logging.info(str(e))
