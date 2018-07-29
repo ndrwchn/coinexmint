@@ -127,6 +127,9 @@ def check_order_state(_type,data):
 				elapsed_time = time.time() - start_time
 
 				if  elapsed_time > 60*2:
+					if left_ratio < 0.2:
+						return 'timeout'
+						
 					logging.info('====:: choose to Continue order or skip: press C continue [s] skip, [f] flip sell to buy or vise.' )
 
                     # TOD: refer test2.py method instead of the following:
