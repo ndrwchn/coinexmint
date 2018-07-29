@@ -129,19 +129,11 @@ def check_order_state(_type,data):
 				if  elapsed_time > 60*2:
 					if left_ratio < 0.2:
 						return 'timeout'
-						
+
 					logging.info('====:: choose to Continue order or skip: press C continue [s] skip, [f] flip sell to buy or vise.' )
 
-                    # TOD: refer test2.py method instead of the following:
-					# timeout0 = 5 # seconds to wait input
-					# t = Timer(timeout0, print, ['sorry, times up, continue.'])
-					# t.start()
-					# s_choice = ''
-					# prompt = "You have %d seconds to choose the correct answer...\n" % timeout0
-					# s_choice = input(prompt)
-					# t.cancel()
-
-					i, o, e = select.select( [sys.stdin], [], [], 5 )
+                    
+					i, o, e = select.select( [sys.stdin], [], [], 3 )
 
 					if (i):
 						s_choice = sys.stdin.readline().strip()
@@ -153,16 +145,10 @@ def check_order_state(_type,data):
 						elif s_choice == 'f':
 							logging.info('return value: %s' % 'flipping ' + _type)
 							return 'flipping ' + _type
+					else:
 						logging.info ("You choosed nothing!")
 
-						# if s_choice == 'S':
-						# 	return 'timeout'
-						# elif s_choice == 'C':
-						# 	return 'done'
-						# elif s_choice == 'F':
-						# 	logging.info('return value: %s' % 'flipping ' + _type)
-						# 	return 'flipping ' + _type
-
+						
 			except Exception as e:
 				logging.info(str(e))
 				index_e = index + 1
