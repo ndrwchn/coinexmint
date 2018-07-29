@@ -385,10 +385,12 @@ def main():
 
 	get_self_cet_prediction()
 
+	importlib.reload(config)
+
 	while True:
 
-		#runtime load config
-		importlib.reload(config)
+		#runtime load config: good for runtime adjust settings
+		#importlib.reload(config)
 
 		try:
 			update_balance()
