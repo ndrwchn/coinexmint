@@ -127,7 +127,8 @@ def check_order_state(_type,data):
 				elapsed_time = time.time() - start_time
 
 				if  elapsed_time > 60*2:
-					if left_ratio < 0.2:
+					if left_ratio < 0.201:
+						logging.info('left amount is skipped for not worth waiting.')
 						return 'timeout'
 
 					logging.info('====:: choose to Continue order or skip: press C continue [s] skip, [f] flip sell to buy or vise.' )
@@ -244,10 +245,14 @@ def digging():
 
 			# add some code to flipping here 
 			if stats_b == 'flipping buy':
-				logging.info('flipping to buy?')
+				logging.info('buy order stocks, flipping to buy submit first?')
+				config.first_submit = 'buy'
+				config.target_price = 'b1'
 			
 			if stats_s == 'flipping sell':
-				logging.info('fipping to sell now?')
+				logging.info('sell order stocks, fipping to sell submit first now?')
+				config.first_submit = 'sell'
+				config.target_price = 's1'
 
 
 			if stats_b == 'timeout' or stats_s == 'timeout':
