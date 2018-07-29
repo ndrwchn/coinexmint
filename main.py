@@ -142,7 +142,7 @@ def check_order_state(_type,data):
 
 					if (i):
 						s_choice = sys.stdin.readline().strip()
-						logging.info ("You choosed: %s" s_choice)
+						logging.info ("You choosed: %s" % s_choice)
 						if s_choice == 's':
 							return 'timeout'
 						# elif s_choice == 'c':
