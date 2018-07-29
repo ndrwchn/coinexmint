@@ -118,11 +118,11 @@ def check_order_state(_type,data):
 				data = data['data']
 				left_amout = float(data['left'])
 
-				logging.info('check order state: id %d %s left %0.3f' % (_id, _type, left_amout))
+				logging.info('check order state: id %d %s left %0.3f trade_mode: %s' % (_id, _type, left_amout, config.first_submit))
 
 				left_ratio = left_amout / float(records['goods_available'] * config.partial_ratio)
 				if left_ratio > 0.8:
-					logging.info('====:: need change sell mode here. %s' % (left_ratio))
+					logging.info('====:: need change sell mode here. %s | current First_sumbit: %s' % (left_ratio, config.first_submit))
 
 				elapsed_time = time.time() - start_time
 
@@ -245,14 +245,16 @@ def digging():
 
 			# add some code to flipping here 
 			if stats_b == 'flipping buy':
-				logging.info('buy order stocks, flipping to buy submit first?')
+				logging.info('current trade_mode: %s, buy order stocks, flipping to buy submit first?' % config.first_submit)
 				config.first_submit = 'buy'
 				config.target_price = 'b1'
+				logging.info('trade_mode updated to %s' % config.first_submit)
 			
 			if stats_s == 'flipping sell':
-				logging.info('sell order stocks, fipping to sell submit first now?')
+				logging.info('current trade_mode: %s, sell order stocks, fipping to sell submit first now?'  % config.first_submit)
 				config.first_submit = 'sell'
 				config.target_price = 's1'
+				logging.info('trade_mode updated to %s' % config.first_submit)
 
 
 			if stats_b == 'timeout' or stats_s == 'timeout':
