@@ -143,11 +143,12 @@ def check_order_state(_type,data):
 							return 'timeout'
 						elif s_choice == 'c':
 							try:
-								data_c = _private_api.cancel(_id, config.market)
+								data_c =_private_api.cancel_order(_id, config.market)
 								logging.info('the order %s is canceled.' % _id)
 								return 'canceled'
 							except:
 								logging.info('the order %s canceling was failed.' % _id)
+								#logging.info()
 								# no return
 						# 	return 'done'
 						elif s_choice == 'f':
