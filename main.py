@@ -131,7 +131,7 @@ def check_order_state(_type,data):
 						logging.info('left amount is skipped for not worth waiting.')
 						return 'timeout'
 
-					logging.info('====:: choose to Continue order or skip: press C continue [s] skip, [f] flip sell to buy or vise.' )
+					logging.info('====:: choose to Continue order or skip: press [C] cancel, [s] skip, [f] flip sell to buy or vise.' )
 
                     
 					i, o, e = select.select( [sys.stdin], [], [], 3 )
