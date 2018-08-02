@@ -133,14 +133,13 @@ class PrivateAPI(object):
                 'https://api.coinex.com/v1/order/pending',
                 json=data,
         )
+
         if response != None:
             data = complex_json.loads(response.text)
             if data["code"] != 0:
                 raise Exception(data["message"])
             elif "data" in data:         
                 return data
-        else:
-            raise Exception("Critical error no cancel_order_transaction")
 
 
     def get_balances(self):
