@@ -127,10 +127,12 @@ def check_order_state(_type,data):
 					try:
 						_private_api.cancel_order(_id, config.market)
 						logging.info('the order %s is canceled.' % _id)
-						cancelorderbyID = False
 						return 'timeout'
 					except Exception as e:
 						logging.info('canceling failed, %s' % e)
+					
+					
+					cancelorderbyID = False
 
 				logging.info('check order state: id %d %s left %0.3f trade_mode: %s' % (_id, _type, left_amout, config.first_submit))
 

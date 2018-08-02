@@ -136,6 +136,7 @@ class PrivateAPI(object):
 
         if response != None:
             data = complex_json.loads(response.text)
+            logging.info('cancel details response: %s' % data)
             if data["code"] != 0:
                 raise Exception(data["message"])
             elif "data" in data:         
