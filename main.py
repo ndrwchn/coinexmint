@@ -191,10 +191,10 @@ def check_order_state(_type,data):
 				records['goods_fees'] = records['goods_fees'] + float(data['deal_fee'])
 			return 'timeout'
 
-		if index < 3:
-			time.sleep(0.1)
+		if index < 4:
+			time.sleep(0.01)
 		else:
-			time.sleep(5)
+			time.sleep(3 + random.random()) 
 
 		
 
