@@ -121,12 +121,16 @@ def check_order_state(_type,data):
 				left_amout = float(data['left'])
 
 				# cancel order triggered
+				# need to work
 
 				if cancelorderbyID:
-					_private_api.cancel_order(_id, config.market)
-					logging.info('the order %s is canceled.' % _id)
-					cancelorderbyID = False
-					return 'timeout'
+					try:
+						_private_api.cancel_order(_id, config.market)
+						logging.info('the order %s is canceled.' % _id)
+						cancelorderbyID = False
+						return 'timeout'
+					except Exception as e:
+						logging.info('canceling failed, %s' % e)
 
 				logging.info('check order state: id %d %s left %0.3f trade_mode: %s' % (_id, _type, left_amout, config.first_submit))
 
