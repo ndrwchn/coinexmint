@@ -80,6 +80,8 @@ def calculate_variance(_private_api):
 def check_order_state(_type,data):
 	data = data['data']
 
+	cancelorderbyID = False
+
 	_id = data['id']
 
 	start_time = time.time()
@@ -118,6 +120,14 @@ def check_order_state(_type,data):
 				data = data['data']
 				left_amout = float(data['left'])
 
+				# cancel order triggered
+
+				if cancelorderbyID:
+					_private_api.cancel_order(_id, config.market)
+					logging.info('the order %s is canceled.' % _id)
+					cancelorderbyID = False
+					return 'timeout'
+
 				logging.info('check order state: id %d %s left %0.3f trade_mode: %s' % (_id, _type, left_amout, config.first_submit))
 
 				left_ratio = left_amout / float(records['goods_available'] * config.partial_ratio)
@@ -142,15 +152,16 @@ def check_order_state(_type,data):
 						if s_choice == 's':
 							return 'timeout'
 						elif s_choice == 'c':
-							try:
-								data_c = _private_api.cancel_order(_id, config.market)
-								logging.info('the order %s is canceled.' % _id)
-								return 'canceled'
-							except:
-								logging.info('the order %s canceling was failed.' % _id)
-								#logging.info()
-								# no return
-						# 	return 'done'
+							cancelorderbyID = True
+						# 	try:
+						# 		data_c = _private_api.cancel_order(_id, config.market)
+						# 		logging.info('the order %s is canceled.' % _id)
+						# 		return 'canceled'
+						# 	except:
+						# 		logging.info('the order %s canceling was failed.' % _id)
+						# 		#logging.info()
+						# 		# no return
+						# # 	return 'done'
 						elif s_choice == 'f':
 							logging.info('return value: %s' % 'flipping ' + _type)
 							return 'flipping ' + _type
@@ -254,14 +265,14 @@ def digging():
 			# add some code to flipping here 
 			if stats_b == 'flipping buy':
 				logging.info('current trade_mode: %s, buy order stocks, flipping to buy submit first?' % config.first_submit)
-				config.first_submit = 'sell'
-				config.target_price = 's1'
+				config.first_submit = 'buy'
+				config.target_price = 'b1'
 				logging.info('trade_mode updated to %s' % config.first_submit)
 			
 			if stats_s == 'flipping sell':
 				logging.info('current trade_mode: %s, sell order stocks, fipping to sell submit first now?'  % config.first_submit)
-				config.first_submit = 'buy'
-				config.target_price = 'b1'
+				config.first_submit = 'sell'
+				config.target_price = 's1'
 				logging.info('trade_mode updated to %s' % config.first_submit)
 
 
