@@ -270,13 +270,13 @@ def digging():
 			if stats_b == 'flipping buy':
 				logging.info('current trade_mode: %s, buy order stocks, flipping to buy submit first?' % config.first_submit)
 				config.first_submit = 'buy'
-				config.target_price = 'b1'
+				config.target_price = 's1'
 				logging.info('trade_mode updated to %s' % config.first_submit)
 			
 			if stats_s == 'flipping sell':
 				logging.info('current trade_mode: %s, sell order stocks, fipping to sell submit first now?'  % config.first_submit)
 				config.first_submit = 'sell'
-				config.target_price = 's1'
+				config.target_price = 'b1'
 				logging.info('trade_mode updated to %s' % config.first_submit)
 
 
