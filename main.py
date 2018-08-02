@@ -126,7 +126,7 @@ def check_order_state(_type,data):
 
 				elapsed_time = time.time() - start_time
 
-				if  elapsed_time > 60*2:
+				if  elapsed_time > 60:
 					if left_ratio < 0.201:
 						logging.info('left amount is skipped for not worth waiting.')
 						return 'timeout'
