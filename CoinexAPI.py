@@ -131,7 +131,7 @@ class PrivateAPI(object):
         response = request_client.request(
                 'DELETE',
                 'https://api.coinex.com/v1/order/pending',
-                json=data,
+                params=data,
         )
 
         if response != None:
