@@ -127,22 +127,22 @@ class PrivateAPI(object):
                 "id": _id,
                 "market": market,
             }
-        logging.info('========== cancel order: %s' % data)
+        logging.info('==== cancel order: %s' % data)
         response = request_client.request(
                 'DELETE',
                 'https://api.coinex.com/v1/order/pending',
                 params=data,
         )
 
-        return response.data
+        #return response.data
 
-        # if response != None:
-        #     data = complex_json.loads(response.text)
-        #     logging.info('cancel details response: %s' % data)
-        #     if data["code"] != 0:
-        #         raise Exception(data["message"])
-        #     elif "data" in data:         
-        #         return data
+        if response != None:
+            data = complex_json.loads(response.text)
+            logging.info('===== cancel details response: %s' % data)
+            if data["code"] != 0:
+                raise Exception(data["message"])
+            elif "data" in data:         
+                return data
 
 
     def get_balances(self):
