@@ -123,6 +123,8 @@ def check_order_state(_type,data):
 				# cancel order triggered
 				# need to work
 
+				# if left over, eg data_b, put 2 x (left_out) = new data_b, and 1/2 for data_s
+
 				if cancelorderbyID:
 					try:
 						data_cancel = _private_api.cancel_order(_id, config.market)
