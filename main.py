@@ -206,6 +206,7 @@ def digging():
 		data = data['data']
 		sell_price = float(data['ticker']['sell'])
 		buy_price = float(data['ticker']['buy'])
+		last_price = float(data['ticker']['last']) 
 
 		#todo for every trading pair it should be have different value
 		minimal_price_pulse = 0.00000001
@@ -241,6 +242,12 @@ def digging():
 				price = buy_price + minimal_price_pulse
 			else:
 				price = sell_price - minimal_price_pulse
+
+			if abs(1 - price / last_price) * 100 > config.skip_ratio :
+				logging.info('order price exceed skip_ratio.')
+				time.sleep(1)
+				return 'exceed'
+				
 
 			if config.first_submit == 'sell':
 				
