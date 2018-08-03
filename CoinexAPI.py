@@ -125,7 +125,7 @@ class PrivateAPI(object):
         request_client = RequestClient()
         data = {
                 "id": _id,
-                "market": market
+                "market": market,
             }
         logging.info('========== cancel order: %s' % data)
         response = request_client.request(
@@ -134,13 +134,15 @@ class PrivateAPI(object):
                 params=data,
         )
 
-        if response != None:
-            data = complex_json.loads(response.text)
-            logging.info('cancel details response: %s' % data)
-            if data["code"] != 0:
-                raise Exception(data["message"])
-            elif "data" in data:         
-                return data
+        return response.data
+
+        # if response != None:
+        #     data = complex_json.loads(response.text)
+        #     logging.info('cancel details response: %s' % data)
+        #     if data["code"] != 0:
+        #         raise Exception(data["message"])
+        #     elif "data" in data:         
+        #         return data
 
 
     def get_balances(self):

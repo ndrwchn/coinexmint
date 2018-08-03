@@ -125,7 +125,7 @@ def check_order_state(_type,data):
 
 				if cancelorderbyID:
 					try:
-						_private_api.cancel_order(_id, config.market)
+						data_cancel = _private_api.cancel_order(_id, config.market)
 						logging.info('the order %s is canceled.' % _id)
 						return 'timeout'
 					except Exception as e:
