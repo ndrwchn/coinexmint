@@ -121,13 +121,13 @@ class PrivateAPI(object):
             elif "data" in data:         
                 return data
 
-    def cancel_order(self, id, market):
+    def cancel_order(self, _id, market):
         request_client = RequestClient()
         data = {
-                "id": id,
+                "id": _id,
                 "market": market
             }
-        # print market
+        logging.info('========== cancel order: %s' % data)
         response = request_client.request(
                 'DELETE',
                 'https://api.coinex.com/v1/order/pending',
