@@ -340,11 +340,11 @@ def need_pause():
 	tmp_data['prev_api_predict_cet'] = prediction
 
 	#add low mining func
-	# if max(prediction - difficulty * config.stop_threshold, records['predict_cet'] - difficulty * config.stop_threshold) > 80:
-    # 	        config.stop_threshold = config.stop_threshold * 0.15
-	# 	config.partial_ratio = 0.98
-	# 	logging.info('======== low mining now...')
-	# 	return False
+	if max(prediction - difficulty * config.stop_threshold, records['predict_cet'] - difficulty * config.stop_threshold) > 80:
+		config.stop_threshold = config.stop_threshold * 0.15
+	 	config.partial_ratio = 0.98
+	 	logging.info('======== low mining now...')
+	 	return False
 
 	if prediction > difficulty * config.stop_threshold:
 		logging.info('from api. difficulty %f prediction %0.3f' % (difficulty,prediction))
