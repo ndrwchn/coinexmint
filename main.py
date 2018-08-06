@@ -106,7 +106,7 @@ def check_order_state(_type,data):
 
 			records['predict_cet'] = total_money / tmp_data['tprice_cet_money']
 
-			print data # debug
+			print (data) # debug
 
 			logging.info('mined %0.2f cet; %0.4f m costed; %0.4f g costed' % (records['predict_cet'],records['money_fees'],records['goods_fees']))
 			
