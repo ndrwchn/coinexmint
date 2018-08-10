@@ -237,7 +237,7 @@ def digging():
 
 		if space_is_enough:
     			
-			if records['goods_available'] < 260000 or records['goods_available'] > 460000:
+			if records['goods_available'] < 260000 or records['goods_available'] > 580000:
     				time.sleep(5*60)
 			
 			amount = records['goods_available'] * config.partial_ratio + random.random()*200
