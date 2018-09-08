@@ -357,6 +357,7 @@ def need_pause():
 	return False
 
 def update_balance():
+	#return # tem
 	data = _private_api.get_balances()
 	data = data['data']
 
